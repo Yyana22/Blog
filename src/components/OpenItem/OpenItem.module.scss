@@ -1,0 +1,102 @@
+.wrap-open-item{
+	background-color: #fff;
+	margin: 30px auto;
+	width: 908px;
+	height: 787px;
+	padding: 15px;
+}
+
+.wrap-open-item-info {
+	display: flex;
+}
+.open-item-info{
+	width: 75%;
+	text-align: start;
+}
+.open-item-right-info{
+	width: 25%;
+}
+.open-item-right-info > button{
+	margin-top: 30px;
+	float: right;
+}
+.open-item-profile-info{
+	display: flex;
+}
+.open-item-profile-info > *{
+	float: right;
+}
+.profile {
+	text-align: end;
+	align-items: center;
+	margin-right: 12px;
+}
+.open-item-info-header{
+	display: flex;
+	& > *:not(:last-child){
+		margin-right: 13px;
+	}
+}
+.count-likes{
+	margin-left: 8px;
+}
+
+.open-item-info-title{
+	color: #1890FF;
+	font-size: 20px;
+	& > * {
+		text-decoration: none;
+		color: #1890FF;
+		font-size: 20px;
+	}
+}
+.open-item-info-tags{
+	display: flex;
+}
+
+.tags-item{
+	border: 1px solid #0000008e;
+	padding: 3px;
+}
+
+.open-item-info-text{
+	color: #0000007c;
+	margin-top: 16px;
+}
+.edit-item{
+	border-radius: 5px;
+	display: flex;
+	align-items: center;
+	border: 2px solid rgb(47, 255, 47);
+	padding: 6px 18px 8px 18px;
+	background-color: rgba(0,0,0,0);
+	margin-left: 12px;
+	&:hover{
+		background-color: rgba(22, 65, 25, 0.185);
+	}
+	& > *{
+		text-decoration: none;
+		font-weight: 500;
+	color: rgb(47, 255, 47);
+	}
+}
+
+.delete-item{
+	border-radius: 5px;
+	display: flex;
+	align-items: center;
+	border: 2px solid rgb(245, 8, 8);
+	padding: 6px 18px 8px 18px;
+	background-color: rgba(0,0,0,0);
+	text-decoration: none;
+	font-weight: 500;
+	color: rgb(245, 8, 8);
+	&:hover{
+		background-color: rgba(241, 71, 71, 0.014);
+	}
+}
+
+.btn-like{
+	background-color: rgba(0,0,0,0);
+	border: none;
+}

@@ -1,12 +1,12 @@
 import classes from './EditLogin.module.scss';
 
 const EditLogin = () => {
-  const changeInput = (e) => {
-    console.log(e);
+  const changeInput = () => {
+    //  console.log(e);
   };
-  const onSubmit = (e) => {
+  const onSubmit = () => {
     //  e.preventDefault();
-    console.log(e);
+    //  console.log(e);
   };
   return (
     <div className={classes['wrap-edit-login']}>

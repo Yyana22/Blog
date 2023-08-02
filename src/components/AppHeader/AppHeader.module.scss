@@ -25,12 +25,14 @@
 	&:hover{
 		background-color: rgba(0,0,0,0.01);
 	}
+	& > *{
+		text-decoration: none;
+		color: #fff;
+	}
 }
 
 .sing-up{
 	border-radius: 5px;
-	font-weight: 500;
-	color: rgb(47, 255, 47);
 	display: flex;
 	align-items: center;
 	border: 2px solid rgb(47, 255, 47);
@@ -38,5 +40,10 @@
 	background-color: rgba(0,0,0,0);
 	&:hover{
 		background-color: rgba(0,0,0,0.01);
+	}
+	& > *{
+		text-decoration: none;
+		font-weight: 500;
+	color: rgb(47, 255, 47);
 	}
 }
