@@ -27,7 +27,7 @@
 	}
 	& > *{
 		text-decoration: none;
-		color: #fff;
+		color: #000000;
 	}
 }
 
@@ -46,4 +46,18 @@
 		font-weight: 500;
 	color: rgb(47, 255, 47);
 	}
+}
+
+.nickname .profile-in{
+	text-decoration: none;
+	color: #000;
+}
+
+img{
+	color: #000;
+}
+
+.item-left > * {
+	text-decoration: none;
+	color: #000;
 }

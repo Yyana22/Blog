@@ -1,5 +1,9 @@
 .wrap-close-item{
 	display: flex;
+	box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.15);
+	height: 108px;
+	background-color: #fff;
+	padding: 16px;
 }
 .close-item-info{
 	width: 75%;
@@ -42,4 +46,15 @@
 .tags-item{
 	border: 1px solid #0000008e;
 	padding: 3px;
+}
+
+.wrap-likes{
+	align-items: center;
+	display: flex;
+}
+.icon-like{
+	cursor: pointer;
+	&:hover{
+		width: 17px;
+	}
 }

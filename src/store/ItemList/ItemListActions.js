@@ -8,11 +8,12 @@ export const fetchStartPosts = () => {
   };
 };
 
-export const getStartPosts = (posts) => {
+export const getStartPosts = (posts, articlesCount) => {
   const step = 5;
   return {
     type: 'GET_START_POSTS',
     posts: [...posts],
+    articlesCount,
     step,
   };
 };
@@ -31,8 +32,8 @@ export const getNewPosts = (page) => async (dispatch) => {
   dispatch(fetchStartPosts());
   try {
     const result = await blogServise.getPosts(page);
-    const { articles } = result;
-    dispatch(getStartPosts(articles));
+    const { articles, articlesCount } = result;
+    dispatch(getStartPosts(articles, articlesCount));
     if (articles) {
       dispatch(setLoading());
     }

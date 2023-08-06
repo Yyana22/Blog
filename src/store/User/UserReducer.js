@@ -2,12 +2,17 @@ const defaultState = {
   username: null,
   email: null,
   token: null,
-  loading: false,
-  error: false,
+  image: null,
 };
 
-export const reducerSingInAccount = (state = defaultState, action = {}) => {
+export const reducerSelectedUser = (state = defaultState, action = {}) => {
   switch (action.type) {
+    case 'CREATE_ACCOUNT':
+      return {
+        username: action.user.username,
+        email: action.user.email,
+        token: action.user.token,
+      };
     case 'SING_IN_ACCOUNT':
       return {
         username: action.user.username,
@@ -19,6 +24,13 @@ export const reducerSingInAccount = (state = defaultState, action = {}) => {
         username: null,
         email: null,
         token: null,
+      };
+    case 'EDIT_ACCOUNT':
+      return {
+        username: action.user.username,
+        login: action.user.login,
+        token: action.user.token,
+        image: action.user.image,
       };
     case 'SET_LOADING':
       return { ...state, loading: false };

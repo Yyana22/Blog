@@ -4,12 +4,14 @@ import { Pagination } from 'antd';
 
 import Item from '../Item/Item';
 import { getNewPosts } from '../../store/ItemList/ItemListActions';
+import Loader from '../Loader/loader';
 
 import classes from './ItemList.module.scss';
 const ItemList = () => {
   const dispatch = useDispatch();
   let propsItem = useSelector((state) => state.itemList);
-
+  let { loading, articlesCount } = useSelector((state) => state.itemList);
+  console.log(loading);
   useEffect(() => {
     dispatch(getNewPosts());
   }, []);
@@ -21,10 +23,21 @@ const ItemList = () => {
       </li>
     );
   });
+  if (!loading) {
+    return (
+      <div>
+        <ul className={classes.ul}>{items}</ul>
+        <Pagination
+          className={classes.pagination}
+          total={articlesCount}
+          onChange={(page) => dispatch(getNewPosts(page))}
+        />
+      </div>
+    );
+  }
   return (
     <div>
-      <ul className={classes.ul}>{items}</ul>
-      <Pagination className={classes.pagination} total={50} onChange={(page) => dispatch(getNewPosts(page))} />
+      <Loader />
     </div>
   );
 };

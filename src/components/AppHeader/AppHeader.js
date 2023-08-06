@@ -1,23 +1,34 @@
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+// import { useEffect } from 'react';
 
-import { outAccount } from '../../store/SingIn/SingInActions';
+import { outAccount } from '../../store/User/UserActions';
 
 import classes from './AppHeader.module.scss';
 const AppHeader = () => {
   const dispatch = useDispatch();
-  let login = useSelector((state) => state.singIn.token);
-  console.log(login);
+  let selectedUserInfo = useSelector((state) => state.selectedUser);
   const clearStore = () => {
     localStorage.clear();
     dispatch(outAccount());
   };
-  let log = login ? (
+  const log = selectedUserInfo.token ? (
     <div className={classes['wrap-log-out']}>
       <button className={classes['create-article']}>Create article</button>
       <div className={classes['profile-info']}>
-        <div className={classes.nickname}>John Doe</div>
-        <img className={classes.avatar} src="#" alt="avatar"></img>
+        <div className={classes.nickname}>
+          <Link className={`${classes['profile-in']}`} to="/profile">
+            {selectedUserInfo ? selectedUserInfo.username : null}
+          </Link>
+        </div>
+        <Link className={classes['profile-in']} to="/profile">
+          <img
+            className={classes.avatar}
+            src={selectedUserInfo ? selectedUserInfo.image : null}
+            alt="avatar"
+            style={{ textDecoration: 'none' }}
+          ></img>
+        </Link>
       </div>
       <button className={classes['log-out']} onClick={clearStore}>
         Log Out
@@ -31,7 +42,7 @@ const AppHeader = () => {
         </Link>
       </button>
       <button className={classes['sing-up']}>
-        <Link className={classes['link-btn']} to="/create-account">
+        <Link className={classes['link-btn']} to="/sing-up">
           Sing Up
         </Link>
       </button>
@@ -40,7 +51,7 @@ const AppHeader = () => {
   return (
     <div className={classes['app-header']}>
       <div className={classes['item-left']}>
-        <p>Realworld Blog</p>
+        <Link to="/">Realworld Blog</Link>
       </div>
       <div className={classes['item-right']}>{log}</div>
     </div>

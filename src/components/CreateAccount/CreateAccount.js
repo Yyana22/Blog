@@ -1,17 +1,24 @@
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { setCreateAccount } from '../../store/CreateAccount/CreateAccountActions';
+import { setCreateAccount } from '../../store/User/UserActions';
 
 import classes from './CreateAccount.module.scss';
 const CreateAccount = () => {
+  let info = useSelector((state) => state.selectedUser);
+  console.log(info);
+  const navigate = useNavigate();
+  if (info.token) {
+    return navigate('/');
+  }
   const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
+    reset,
   } = useForm();
   const password = watch('password');
   const onSubmit = handleSubmit((data) => {
@@ -22,13 +29,8 @@ const CreateAccount = () => {
       password,
     };
     dispatch(setCreateAccount(user));
+    reset();
   });
-  if (errors == 'Error: username') {
-    console.log(errors);
-  }
-  if (errors == 'Error: email') {
-    console.log(errors);
-  }
   return (
     <div className={classes['wrap-create-account']}>
       <p className={classes['title-create-account']}>Create new account</p>
@@ -58,8 +60,8 @@ const CreateAccount = () => {
             aria-invalid={errors.username ? 'true' : 'false'}
           ></input>
           {errors?.username && (
-            <p role="alert" style={{ color: 'red' }}>
-              First name is norequired
+            <p className={classes['p-error']} role="alert" style={{ color: 'red', margin: '5px 0 0 0' }}>
+              {errors.username.message}
             </p>
           )}
         </div>
@@ -80,8 +82,8 @@ const CreateAccount = () => {
             aria-invalid={errors.email ? 'true' : 'false'}
           ></input>
           {errors?.email && (
-            <p role="alert" style={{ color: 'red' }}>
-              Email is required
+            <p className={classes['p-error']} role="alert" style={{ color: 'red', margin: '5px 0 0 0' }}>
+              {errors.email.message}
             </p>
           )}
         </div>
@@ -109,8 +111,8 @@ const CreateAccount = () => {
             })}
           ></input>
           {errors?.password && (
-            <p role="alert" style={{ color: 'red' }}>
-              Password is norequired
+            <p className={classes['p-error']} role="alert" style={{ color: 'red', margin: '5px 0 0 0' }}>
+              {errors.password.message}
             </p>
           )}
         </div>
@@ -126,6 +128,11 @@ const CreateAccount = () => {
               validate: (value) => value === password || 'Passwords must match',
             })}
           ></input>
+          {errors?.repeat && (
+            <p className={classes['p-error']} role="alert" style={{ color: 'red', margin: '5px 0 0 0' }}>
+              {errors.repeat.message}
+            </p>
+          )}
         </div>
         <div className={classes['wrap-agree']}>
           <input

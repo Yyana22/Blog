@@ -23,6 +23,33 @@ export default class BlogServise {
       console.log(error);
     }
   }
+  async editAccount(user) {
+    try {
+      const result = await fetch('https://blog.kata.academy/api/user/', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Token ${localStorage.getItem('token')}`,
+        },
+        body: JSON.stringify({
+          user: {
+            username: user.username,
+            email: user.email,
+            password: user.password,
+            image: user.image,
+          },
+        }),
+      }).then((body) => body);
+      if (!result.ok) {
+        throw new Error('Код ошибки: ' + result.status);
+      }
+      const userData = await result.json();
+      return userData;
+    } catch (error) {
+      console.log(error);
+    }
+  }
   async singInAccount(user) {
     try {
       const result = await fetch('https://blog.kata.academy/api/users/login', {

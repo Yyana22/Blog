@@ -1,11 +1,12 @@
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
 
+// import like from '../../img/heartRed.png';
+import noLike from '../../img/heartBlack.png';
+
 import classes from './Item.module.scss';
 const Item = (props) => {
-  //   console.log(props.props);
-  const { slug, title, description, body, createdAt, updatedAt, tagList, favorited, favoritesCount, author } =
-    props.props;
+  const { slug, title, description, createdAt, tagList, favoritesCount, author } = props.props;
 
   const tags = tagList.map((item) => {
     return (
@@ -14,7 +15,7 @@ const Item = (props) => {
       </div>
     );
   });
-  console.log(slug, body, updatedAt, favorited);
+  //   console.log(slug, body, updatedAt, favorited);
   return (
     <div className={classes['wrap-close-item']}>
       <div className={classes['close-item-info']}>
@@ -22,8 +23,8 @@ const Item = (props) => {
           <div className={classes['close-item-info-title']}>
             <Link to={`/articles/${slug}`}>{title}</Link>
           </div>
-          <div>
-            <img src="../../img/heartRed.png" alt="icon-like" />
+          <div className={classes['wrap-likes']}>
+            <img className={classes['icon-like']} src={noLike} alt="icon-like" />
             <span className={classes['count-likes']}>{favoritesCount}</span>
           </div>
         </div>
