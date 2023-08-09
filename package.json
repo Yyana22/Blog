@@ -55,6 +55,7 @@
 		"lint-staged": "^13.2.3",
 		"prettier": "^3.0.0",
 		"react-hook-form": "^7.45.2",
+		"react-markdown": "^8.0.7",
 		"react-redux": "^8.1.1",
 		"react-router-dom": "^6.14.2",
 		"redux": "^4.2.1",

@@ -67,7 +67,7 @@
 	border-radius: 5px;
 	display: flex;
 	align-items: center;
-	border: 2px solid rgb(47, 255, 47);
+	border: 2px solid #52C41A;
 	padding: 6px 18px 8px 18px;
 	background-color: rgba(0,0,0,0);
 	margin-left: 12px;
@@ -77,7 +77,7 @@
 	& > *{
 		text-decoration: none;
 		font-weight: 500;
-	color: rgb(47, 255, 47);
+	color: #52C41A;
 	}
 }
 
@@ -99,4 +99,10 @@
 .btn-like{
 	background-color: rgba(0,0,0,0);
 	border: none;
+}
+
+.btn-article{
+	margin-top: 30px;
+	display: flex;
+	float: right;
 }

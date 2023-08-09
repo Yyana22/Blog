@@ -73,6 +73,49 @@ export default class BlogServise {
       console.log(error);
     }
   }
+
+  async createArticle(article) {
+    console.log(article);
+    try {
+      const result = await fetch('https://blog.kata.academy/api/articles', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Token ${localStorage.getItem('token')}`,
+        },
+        body: JSON.stringify({
+          article: {
+            title: article.title,
+            description: article.description,
+            body: article.body,
+            tags: article.tags,
+          },
+        }),
+      }).then((body) => body);
+      if (!result.ok) {
+        throw new Error('Код ошибки: ' + result.status);
+      }
+      return result;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async deleteArticle(slug) {
+    try {
+      const response = await fetch(`https://blog.kata.academy/api/articles/${slug}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Token ${localStorage.getItem('token')}`,
+          'Content-Type': 'application/json',
+        },
+      });
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  }
   async getPosts(page) {
     try {
       const response = await fetch(`https://blog.kata.academy/api/articles?limit=5&offset=${page}`).then((result) =>

@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-// import { useEffect } from 'react';
 
 import { outAccount } from '../../store/User/UserActions';
+import nullAva from '../../img/ocean-svgrepo-com.svg';
 
 import classes from './AppHeader.module.scss';
 const AppHeader = () => {
@@ -12,11 +12,16 @@ const AppHeader = () => {
     localStorage.clear();
     dispatch(outAccount());
   };
+  let ava = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).image : null;
   const log = selectedUserInfo.token ? (
     <div className={classes['wrap-log-out']}>
-      <button className={classes['create-article']}>Create article</button>
+      <button className={`${classes['create-article']} ${classes['sing-up']}`}>
+        <Link className={classes['profile-in']} to="/new-article">
+          Create article
+        </Link>
+      </button>
       <div className={classes['profile-info']}>
-        <div className={classes.nickname}>
+        <div className={classes.nickname} style={{ alignItems: 'center' }}>
           <Link className={`${classes['profile-in']}`} to="/profile">
             {selectedUserInfo ? selectedUserInfo.username : null}
           </Link>
@@ -24,9 +29,9 @@ const AppHeader = () => {
         <Link className={classes['profile-in']} to="/profile">
           <img
             className={classes.avatar}
-            src={selectedUserInfo ? selectedUserInfo.image : null}
+            src={ava ? ava : nullAva}
             alt="avatar"
-            style={{ textDecoration: 'none' }}
+            style={{ textDecoration: 'none', height: '46px', width: '46px', marginLeft: '10px' }}
           ></img>
         </Link>
       </div>

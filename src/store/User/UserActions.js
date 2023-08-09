@@ -66,14 +66,13 @@ export const singInAccount = (user) => async (dispatch) => {
 export const setEditAccount = (user) => async (dispatch) => {
   try {
     const result = await blogServise.editAccount(user);
-    const userData = result.user;
-    if (userData) {
+    console.log(result);
+    if (result) {
       dispatch(setLoading());
-      dispatch(fetchEditAccount(userData));
+      dispatch(fetchEditAccount(result.user));
     }
-    console.log(userData);
-    localStorage.setItem('token', userData.user.token);
-    localStorage.setItem('user', JSON.stringify(userData.user));
+    localStorage.setItem('token', result.user.token);
+    localStorage.setItem('user', JSON.stringify(result.user));
   } catch (error) {
     dispatch(setError(error));
   }

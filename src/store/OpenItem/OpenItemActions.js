@@ -9,7 +9,6 @@ export const fetchStartPost = () => {
 };
 
 export const getStartPost = (post) => {
-  console.log(post);
   return {
     type: 'GET_START_POST',
     post: post,

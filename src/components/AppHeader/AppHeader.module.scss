@@ -35,7 +35,7 @@
 	border-radius: 5px;
 	display: flex;
 	align-items: center;
-	border: 2px solid rgb(47, 255, 47);
+	border: 2px solid #52C41A;
 	padding: 6px 18px 8px 18px;
 	background-color: rgba(0,0,0,0);
 	&:hover{
@@ -44,7 +44,7 @@
 	& > *{
 		text-decoration: none;
 		font-weight: 500;
-	color: rgb(47, 255, 47);
+	color: #52C41A;
 	}
 }
 
@@ -60,4 +60,20 @@ img{
 .item-left > * {
 	text-decoration: none;
 	color: #000;
+}
+
+.create-article{
+	color: #52C41A;
+	font-size: 14px;
+}
+
+.log-out{
+	border-radius: 5px;
+	display: flex;
+	font-size: 18px;
+	align-items: center;
+	border: 2px solid #000;
+	color: #000;
+	padding: 6px 18px 8px 18px;
+	background-color: rgba(0,0,0,0);
 }
