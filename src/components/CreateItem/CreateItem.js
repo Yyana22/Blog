@@ -46,7 +46,6 @@ const CreateItem = () => {
       <input
         className={classes.tag}
         placeholder="Tag"
-        style={errors.tag ? { border: '1px solid red' } : { border: '1px solid #d9d9d9' }}
         {...register(`tags.${index}.name`, {
           required: 'This field is required',
           maxLength: {
@@ -111,12 +110,30 @@ const CreateItem = () => {
           </div>
           <div className={classes['new-item-info-text']}>
             <label>Text</label>
-            <input type="text" placeholder="Text" required {...register('body')} className={classes.body}></input>
+            <textarea
+              className={classes['textarea-creation']}
+              placeholder="Text"
+              {...register('body', {
+                required: 'This field is required',
+                maxLength: {
+                  value: 1000,
+                  message: 'Maximum 1000 characters',
+                },
+                pattern: {
+                  value: /^\s*\S.*$/,
+                  message: 'Text cannot be empty',
+                },
+              })}
+            ></textarea>
           </div>
           <label>Tags</label>
-          <div className={classes['wrap-item-tags']}>
+          <div className={classes['wrap-item-tags']} style={{ marginTop: '10px' }}>
             <div className={classes['list-tags']}>{tags}</div>
-            <button type="button" className={classes['btn-add-tag']} onClick={() => append({ name: '' })}>
+            <button
+              className={tags.length ? `${classes['btn-add-tag']}` : `${classes['null-tag']}`}
+              type="button"
+              onClick={() => append({ name: '' })}
+            >
               Add tag
             </button>
           </div>

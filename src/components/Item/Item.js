@@ -1,13 +1,15 @@
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
 
-// import like from '../../img/heartRed.png';
-import noLike from '../../img/heartBlack.png';
+import { likedArticle, unLikedArticle } from '../../store/Likes/LikesActions';
 
 import classes from './Item.module.scss';
 const Item = (props) => {
-  const { slug, title, description, createdAt, tagList, favoritesCount, author } = props.props;
-
+  const dispatch = useDispatch();
+  const [notLike, setNotLike] = useState(false);
+  const { slug, title, description, createdAt, tagList, favorited, favoritesCount, author } = props.props;
   const tags = tagList.map((item) => {
     return (
       <div key={Math.random() * 1000000} className={classes['tags-item']}>
@@ -15,7 +17,22 @@ const Item = (props) => {
       </div>
     );
   });
-  //   console.log(slug, body, updatedAt, favorited);
+  useEffect(() => {
+    setNotLike(favorited);
+  }, [favorited]);
+  const checkLike = () => {
+    if (!localStorage.getItem('token')) {
+      return;
+    }
+    setNotLike(!notLike);
+
+    if (!notLike) {
+      dispatch(likedArticle(slug));
+    }
+    if (notLike) {
+      dispatch(unLikedArticle(slug));
+    }
+  };
   return (
     <div className={classes['wrap-close-item']}>
       <div className={classes['close-item-info']}>
@@ -23,16 +40,22 @@ const Item = (props) => {
           <div className={classes['close-item-info-title']}>
             <Link to={`/articles/${slug}`}>{title}</Link>
           </div>
-          <div className={classes['wrap-likes']}>
-            <img className={classes['icon-like']} src={noLike} alt="icon-like" />
+          <label className={classes['wrap-likes']}>
+            <input className={classes['article-info__likes']} checked={notLike} onChange={checkLike} type="checkbox" />
+            <span className={classes['icon-like']}></span>
             <span className={classes['count-likes']}>{favoritesCount}</span>
-          </div>
+          </label>
         </div>
         <div className={classes['close-item-info-tags']}>{tags}</div>
-        <div className={classes['close-item-info-text']}>{description}</div>
+        <p className={classes['close-item-info-text']}>{description}</p>
       </div>
       <div className={classes['close-item-profile-info']}>
-        <img width="50" height="50" src={author.image} className={classes['avatar']} alt="avatar" />
+        <img
+          style={{ width: '50px', height: '50px', borderRadius: '100%' }}
+          src={author.image}
+          className={classes['avatar']}
+          alt="avatar"
+        />
         <div className={classes.profile}>
           <div className={classes['profile-names']}>{author.username}</div>
           <div className={classes['date-created']}>{format(new Date(createdAt), 'PP')}</div>

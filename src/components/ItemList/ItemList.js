@@ -11,11 +11,9 @@ const ItemList = () => {
   const dispatch = useDispatch();
   let propsItem = useSelector((state) => state.itemList);
   let { loading, articlesCount } = useSelector((state) => state.itemList);
-  console.log(loading);
   useEffect(() => {
     dispatch(getNewPosts());
   }, []);
-
   let items = propsItem.posts.map((item) => {
     return (
       <li key={Math.random() * 10000} className={classes['item-closer']}>
@@ -28,6 +26,8 @@ const ItemList = () => {
       <div>
         <ul className={classes.ul}>{items}</ul>
         <Pagination
+          defaultCurrent={1}
+          pageSize={5}
           className={classes.pagination}
           total={articlesCount}
           onChange={(page) => dispatch(getNewPosts(page))}

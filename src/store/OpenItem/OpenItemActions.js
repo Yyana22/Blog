@@ -14,7 +14,6 @@ export const getStartPost = (post) => {
     post: post,
   };
 };
-
 export const setLoading = () => ({
   type: 'SET_LOADING',
 });
@@ -24,7 +23,6 @@ export const setError = (error) => ({
 });
 
 export const getNewPost = (slug) => async (dispatch) => {
-  console.log(slug);
   dispatch(fetchStartPost());
   try {
     const result = await blogServise.getPost(slug);

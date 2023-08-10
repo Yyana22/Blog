@@ -31,7 +31,7 @@ const AppHeader = () => {
             className={classes.avatar}
             src={ava ? ava : nullAva}
             alt="avatar"
-            style={{ textDecoration: 'none', height: '46px', width: '46px', marginLeft: '10px' }}
+            style={{ textDecoration: 'none', height: '46px', width: '46px', marginLeft: '10px', borderRadius: '100%' }}
           ></img>
         </Link>
       </div>

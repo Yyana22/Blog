@@ -1,19 +1,19 @@
 import { useParams, Link } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Popconfirm } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import ReactMarkdown from 'react-markdown';
 
+import { likedArticle, unLikedArticle } from '../../store/Likes/LikesActions';
+import { getNewPost } from '../../store/OpenItem/OpenItemActions';
 import { deleteArticle } from '../../store/Article/ArticleActions';
 import Loader from '../Loader/loader';
-import { getNewPost } from '../../store/OpenItem/OpenItemActions';
-import like from '../../img/heartRed.png';
-import noLike from '../../img/heartBlack.png';
 
 import classes from './OpenItem.module.scss';
 const OpenItem = () => {
   const { slug } = useParams();
-
+  const [notLike, setNotLike] = useState(false);
+  let isFavorite = useSelector((state) => state.likes);
   const dispatch = useDispatch();
   let propsItem = useSelector((state) => state.openItem.post);
   let isLoading = useSelector((state) => state.openItem.loading);
@@ -36,7 +36,7 @@ const OpenItem = () => {
       </div>
     );
   }
-  const { title, description, createdAt, favorited, favoritesCount, body, author, tagList } = propsItem;
+  const { title, description, createdAt, body, author, tagList } = propsItem;
   let tags = null;
   if (tagList) {
     tags = tagList.map((item) => {
@@ -47,6 +47,19 @@ const OpenItem = () => {
       );
     });
   }
+  const checkLike = () => {
+    if (!localStorage.getItem('token')) {
+      return;
+    }
+    setNotLike(!notLike);
+
+    if (!notLike) {
+      dispatch(likedArticle(slug));
+    }
+    if (notLike) {
+      dispatch(unLikedArticle(slug));
+    }
+  };
   let btn =
     selectedUsername === author?.username ? (
       <div className={classes['btn-article']}>
@@ -69,12 +82,16 @@ const OpenItem = () => {
         <div className={classes['open-item-info']}>
           <div className={classes['open-item-info-header']}>
             <div className={classes['open-item-info-title']}>{title}</div>
-            <div>
-              <button className={classes['btn-like']} onClick={() => console.log(!favorited)}>
-                <img src={favorited ? like : noLike} alt="icon-like" />
-              </button>
-              <span className={classes['count-likes']}>{favoritesCount}</span>
-            </div>
+            <label className={classes['wrap-likes']}>
+              <input
+                className={classes['article-info__likes']}
+                checked={notLike}
+                onChange={checkLike}
+                type="checkbox"
+              />
+              <span className={classes['icon-like']}></span>
+              <span className={classes['count-likes']}>{isFavorite.favoritesCount}</span>
+            </label>
           </div>
           <div className={classes['open-item-info-tags']}>{tags}</div>
           <div className={classes['open-item-info-text']}>{description}</div>
