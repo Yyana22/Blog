@@ -21,16 +21,19 @@ const ItemList = () => {
       </li>
     );
   });
+  const changePagination = (page) => {
+    dispatch(getNewPosts(page));
+  };
   if (!loading) {
     return (
       <div>
         <ul className={classes.ul}>{items}</ul>
         <Pagination
-          defaultCurrent={1}
-          pageSize={5}
+          defaultCurrent={propsItem.page}
           className={classes.pagination}
           total={articlesCount}
-          onChange={(page) => dispatch(getNewPosts(page))}
+          //  onChange={(page) => dispatch(getNewPosts(page))}
+          onChange={changePagination}
         />
       </div>
     );

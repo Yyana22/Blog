@@ -3,6 +3,7 @@ const defaultState = {
   posts: [],
   error: false,
   articlesCount: 0,
+  page: 1,
 };
 
 export const reducerItemList = (state = defaultState, action = {}) => {
@@ -18,6 +19,7 @@ export const reducerItemList = (state = defaultState, action = {}) => {
         posts: [...action.posts],
         loading: true,
         articlesCount: action.articlesCount,
+        page: action.page,
       };
     case 'SET_LOADING':
       return { ...state, loading: false };

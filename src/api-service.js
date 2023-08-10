@@ -147,7 +147,7 @@ export default class BlogServise {
   }
   async getPosts(page) {
     try {
-      const response = await fetch(`https://blog.kata.academy/api/articles?limit=5&offset=${page}`).then((result) =>
+      const response = await fetch(`https://blog.kata.academy/api/articles?limit=5&offset=${page * 5}`).then((result) =>
         result.json()
       );
       return await response;
