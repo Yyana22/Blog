@@ -1,4 +1,4 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Popconfirm } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,6 +11,8 @@ import Loader from '../Loader/loader';
 
 import classes from './OpenItem.module.scss';
 const OpenItem = () => {
+  const navigate = useNavigate();
+
   const { slug } = useParams();
   const [notLike, setNotLike] = useState(false);
   let isFavorite = useSelector((state) => state.likes);
@@ -25,18 +27,10 @@ const OpenItem = () => {
   if (isLoading) {
     return <Loader />;
   }
-  if (!Object.entries(propsItem).length) {
-    return (
-      <div>
-        <h1 style={{ textAlign: 'center', color: 'red' }}>Oops, this page doesn&apos;t exist</h1>
-        <h2 style={{ textAlign: 'center' }}>
-          <Link to="/" style={{ textDecoration: 'none', color: 'green' }}>
-            Go back to the list
-          </Link>
-        </h2>
-      </div>
-    );
-  }
+  const deleted = () => {
+    deleteArticle(propsItem.slug);
+    return navigate('/');
+  };
   const { title, description, createdAt, body, author, tagList } = propsItem;
   let tags = null;
   if (tagList) {
@@ -64,10 +58,7 @@ const OpenItem = () => {
   let btn =
     selectedUsername === author?.username ? (
       <div className={classes['btn-article']}>
-        <Popconfirm
-          description="are you sure you want to delete the article?"
-          onConfirm={deleteArticle(propsItem.slug)}
-        >
+        <Popconfirm description="are you sure you want to delete the article?" onConfirm={deleted}>
           <button className={classes['delete-item']}>Delete</button>
         </Popconfirm>
         <button className={classes['edit-item']}>

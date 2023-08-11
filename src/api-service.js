@@ -89,7 +89,7 @@ export default class BlogServise {
             title: article.title,
             description: article.description,
             body: article.body,
-            tags: article.tagsArr,
+            tagList: article.tagsArr,
           },
         }),
       }).then((body) => body);
