@@ -75,7 +75,7 @@ export default class BlogServise {
   }
 
   async createArticle(article) {
-    console.log(article);
+    console.log(article.tagsArr);
     try {
       const result = await fetch('https://blog.kata.academy/api/articles', {
         method: 'POST',
@@ -89,7 +89,7 @@ export default class BlogServise {
             title: article.title,
             description: article.description,
             body: article.body,
-            tags: article.tags,
+            tags: article.tagsArr,
           },
         }),
       }).then((body) => body);
@@ -164,6 +164,3 @@ export default class BlogServise {
     }
   }
 }
-
-const res = new BlogServise();
-console.log(res.singInAccount().then((body) => body));

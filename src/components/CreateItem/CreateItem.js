@@ -23,9 +23,7 @@ const CreateItem = () => {
   });
   const onSubmit = handleSubmit((data) => {
     const { title, description, tags, body } = data;
-    console.log(tags);
     let tagsArr = tags.map((item) => item.name);
-    console.log(tagsArr);
     const article = {
       title,
       description,
@@ -40,28 +38,14 @@ const CreateItem = () => {
     name: 'tags',
     control,
   });
-  const errorForTags = errors?.tags ? classes['tags__wrapper__error'] : classes['error_hidden'];
   let tags = fields.map((field, index) => (
-    <div key={field.id} className={classes['item-tag']}>
-      <input
-        className={classes.tag}
-        placeholder="Tag"
-        {...register(`tags.${index}.name`, {
-          required: 'This field is required',
-          maxLength: {
-            value: 20,
-            message: 'Maximum 20 characters',
-          },
-          pattern: {
-            value: /^\s*\S.*$/,
-            message: 'Tags cannot be empty',
-          },
-        })}
-      />
-      <div className={errorForTags}>{errors?.tags && <p>{errors?.tags[index]?.name?.message}</p>}</div>
-      <button className={classes['delete-tag']} type="button" onClick={() => remove(index)}>
-        Delete
-      </button>
+    <div key={field.id}>
+      <div className={classes['item-tag']}>
+        <input className={classes.tag} placeholder="Tag" {...register(`tags.${index}.name`)} />
+        <button className={classes['delete-tag']} type="button" onClick={() => remove(index)}>
+          Delete
+        </button>
+      </div>
     </div>
   ));
 
@@ -88,6 +72,7 @@ const CreateItem = () => {
                 },
               })}
             ></input>
+            <div>{errors?.title && <p style={{ color: 'red' }}>{errors?.title.message}</p>}</div>
           </div>
           <div className={classes['new-item-info-description']}>
             <label>Short description</label>
@@ -119,12 +104,9 @@ const CreateItem = () => {
                   value: 1000,
                   message: 'Maximum 1000 characters',
                 },
-                pattern: {
-                  value: /^\s*\S.*$/,
-                  message: 'Text cannot be empty',
-                },
               })}
             ></textarea>
+            <div>{errors?.body && <p style={{ color: 'red' }}>{errors?.body.message}</p>}</div>
           </div>
           <label>Tags</label>
           <div className={classes['wrap-item-tags']} style={{ marginTop: '10px' }}>

@@ -30,7 +30,6 @@ export const getNewPosts = (page) => async (dispatch) => {
   try {
     const result = await blogServise.getPosts(page);
     const { articles, articlesCount } = result;
-    console.log(articles);
     dispatch(getStartPosts(articles, articlesCount, page));
     if (articles) {
       dispatch(setLoading());

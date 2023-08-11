@@ -1,15 +1,31 @@
 const defaultState = {
-  favoriteCount: null,
+  favoritesCount: null,
   error: false,
-  favorite: false,
+  favorited: false,
 };
 
 export const reducerLikes = (state = defaultState, action = {}) => {
   switch (action.type) {
     case 'LIKE':
-      return { ...state, favorite: action.favorite, favoriteCount: action.favoriteCount };
+      return {
+        ...state,
+        articles: state.articles.map((article) => {
+          if (article.slug === action.article.slug) {
+            return { ...article, favorited: false, favoritesCount: article.favoritesCount - 1 };
+          }
+          return article;
+        }),
+      };
     case 'NO_LIKE':
-      return { ...state, favorite: action.favorite, favoriteCount: action.favoriteCount };
+      return {
+        ...state,
+        articles: state.articles.map((article) => {
+          if (article.slug === action.article.slug) {
+            return { ...article, favorited: true, favoritesCount: article.favoritesCount + 1 };
+          }
+          return article;
+        }),
+      };
     case 'SET_LOADING':
       return { ...state, loading: false };
     case 'SET_ERROR':

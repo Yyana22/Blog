@@ -1,10 +1,17 @@
 import BlogServise from '../../api-service';
 
 const blogServise = new BlogServise();
-export const fetchCreateAccount = (article) => {
+export const fetchCreateArticle = (article) => {
+  console.log(article);
   return {
     type: 'CREATE_ARTIKLE',
     article,
+  };
+};
+
+export const deleteArticleAction = () => {
+  return {
+    type: 'DELETE_ARTICLE',
   };
 };
 
@@ -14,8 +21,12 @@ export const setError = (error) => ({
 });
 
 export const createArticle = (article) => async (dispatch) => {
+  console.log(article);
   try {
-    await blogServise.createArticle(article);
+    const result = await blogServise.createArticle(article);
+    let res = await result.json();
+    console.log(res);
+    fetchCreateArticle(res);
   } catch (error) {
     dispatch(setError(error));
   }

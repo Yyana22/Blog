@@ -14,6 +14,7 @@ export const reducerItemList = (state = defaultState, action = {}) => {
         loading: true,
       };
     case 'GET_START_POSTS':
+      console.log(action.posts);
       return {
         ...state,
         posts: [...action.posts],

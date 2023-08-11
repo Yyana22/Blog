@@ -17,14 +17,15 @@ const OpenItem = () => {
   const dispatch = useDispatch();
   let propsItem = useSelector((state) => state.openItem.post);
   let isLoading = useSelector((state) => state.openItem.loading);
+  let del = useSelector((state) => state.article.delete);
   let selectedUsername = useSelector((state) => state.selectedUser.username);
   useEffect(() => {
     dispatch(getNewPost(slug));
-  }, []);
+  }, [del]);
   if (isLoading) {
     return <Loader />;
   }
-  if (!propsItem) {
+  if (!Object.entries(propsItem).length) {
     return (
       <div>
         <h1 style={{ textAlign: 'center', color: 'red' }}>Oops, this page doesn&apos;t exist</h1>

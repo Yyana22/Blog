@@ -3,6 +3,7 @@ const defaultState = {
   post: {},
   error: false,
   favorite: false,
+  delete: false,
 };
 
 export const reducerOpenItem = (state = defaultState, action = {}) => {
@@ -18,6 +19,11 @@ export const reducerOpenItem = (state = defaultState, action = {}) => {
         ...state,
         post: action.post,
         loading: true,
+      };
+    case 'DELETE_ARTIKLE':
+      return {
+        ...state,
+        delete: true,
       };
     case 'LIKE':
       return { ...state, favorite: true };

@@ -21,9 +21,6 @@ const ItemList = () => {
       </li>
     );
   });
-  const changePagination = (page) => {
-    dispatch(getNewPosts(page));
-  };
   if (!loading) {
     return (
       <div>
@@ -32,8 +29,7 @@ const ItemList = () => {
           defaultCurrent={propsItem.page}
           className={classes.pagination}
           total={articlesCount}
-          //  onChange={(page) => dispatch(getNewPosts(page))}
-          onChange={changePagination}
+          onChange={(page) => dispatch(getNewPosts(page))}
         />
       </div>
     );

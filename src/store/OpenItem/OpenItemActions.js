@@ -27,19 +27,12 @@ export const getNewPost = (slug) => async (dispatch) => {
   try {
     const result = await blogServise.getPost(slug);
     const { article } = result;
+    console.log(result);
     dispatch(getStartPost(article));
     if (article) {
       dispatch(setLoading());
     }
-
-    if (!article) {
-      dispatch(getStartPost());
-    }
   } catch (error) {
-    if (error instanceof TypeError) {
-      dispatch(getStartPost());
-    } else {
-      dispatch(setError(error));
-    }
+    dispatch(setError(error));
   }
 };
