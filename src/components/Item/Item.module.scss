@@ -43,7 +43,14 @@
 .tags-item{
 	border: 1px solid #0000008e;
 	padding: 3px;
+	&:not(:last-child){
+		margin-right: 5px;
+	}
 }
+.tags-item-hide{
+	display: none;
+}
+
 .close-item-info-text{ 
   overflow: hidden;
   text-overflow: ellipsis;

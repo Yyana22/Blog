@@ -2,8 +2,7 @@ import { useForm, useFieldArray } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 
 import { createArticle } from '../../store/Article/ArticleActions';
-
-import classes from './CreateItem.module.scss';
+import classes from '../styles/styleOpenArticle.module.scss';
 const CreateItem = () => {
   const dispatch = useDispatch();
   const {
@@ -50,8 +49,8 @@ const CreateItem = () => {
   ));
 
   return (
-    <div className={classes['wrap-new-item']}>
-      <div className={classes['new-item-title']}>Create new article</div>
+    <div className={classes['wrap-item']}>
+      <div className={classes['item-title']}>Create new article</div>
       <div className={classes['new-item-info']}>
         <form onSubmit={onSubmit}>
           <div className={classes['new-item-info-title']}>

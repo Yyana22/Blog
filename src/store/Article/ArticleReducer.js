@@ -1,19 +1,33 @@
 const defaultState = {
-  article: null,
+  loading: false,
+  post: {},
+  error: false,
+  favorite: false,
+  delete: false,
 };
 
 export const reducerArticle = (state = defaultState, action = {}) => {
   switch (action.type) {
-    //  case 'CREATE_ARTIKLE':
-    //    return {
-    //      username: action.user.username,
-    //      email: action.user.email,
-    //      token: action.user.token,
-    //    };
-    //  case 'EDIT_ARTIKLE':
-    //    return {
-    //      article: action.article,
-    //    };
+    case 'ADD_START_POST':
+      return {
+        ...state,
+        loading: true,
+      };
+    case 'GET_START_POST':
+      return {
+        ...state,
+        post: action.post,
+        loading: true,
+      };
+    case 'DELETE_ARTIKLE':
+      return {
+        ...state,
+        delete: true,
+      };
+    case 'LIKE':
+      return { ...state, favorite: true };
+    case 'NO_LIKE':
+      return { ...state, favorite: false };
     case 'SET_LOADING':
       return { ...state, loading: false };
     case 'SET_ERROR':

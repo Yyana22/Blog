@@ -4,8 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
 import { setCreateAccount } from '../../store/User/UserActions';
-
-import classes from './CreateAccount.module.scss';
+import classes from '../styles/styleFormsAccount.module.scss';
 const CreateAccount = () => {
   let info = useSelector((state) => state.selectedUser);
   console.log(info);
@@ -34,9 +33,9 @@ const CreateAccount = () => {
     }
   }, [info.token, navigate]);
   return (
-    <div className={classes['wrap-create-account']}>
-      <p className={classes['title-create-account']}>Create new account</p>
-      <form className={classes['form-create-account']} onSubmit={onSubmit}>
+    <div className={classes['wrap-form-account']}>
+      <p className={classes['title-form-account']}>Create new account</p>
+      <form className={classes['form-account']} onSubmit={onSubmit}>
         <div className={classes['wrap-user-name']}>
           <label htmlFor="Username">Username</label>
           <input
@@ -148,11 +147,11 @@ const CreateAccount = () => {
           ></input>
           <label htmlFor="Agree">I agree to the processing of my personal information</label>
         </div>
-        <button type="submit" className={classes['btn-create-account']}>
+        <button type="submit" className={classes['btn-form']}>
           Create
         </button>
       </form>
-      <div className={classes['link-sing-in']}>
+      <div className={classes['link-form']}>
         Already have an account?<Link to="/sing-in"> Sign In</Link>.
       </div>
     </div>

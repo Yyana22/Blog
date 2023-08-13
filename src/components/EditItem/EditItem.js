@@ -4,14 +4,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 
 import { editArticle } from '../../store/Article/ArticleActions';
-
-import classes from './EditItem.module.scss';
+import classes from '../styles/styleOpenArticle.module.scss';
 const EditItem = () => {
   const { slug } = useParams();
-  console.log(slug);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { title, description, body, tagList } = useSelector((state) => state.openItem.post);
+  const { title, description, body, tagList } = useSelector((state) => state.article.post);
   const userToken = localStorage.getItem('token');
 
   useEffect(() => {
@@ -31,7 +29,7 @@ const EditItem = () => {
       title: title,
       description: description,
       body: body,
-      tags: tagList.map((tag) => {
+      tags: tagList?.map((tag) => {
         return { name: tag };
       }),
     },
@@ -66,8 +64,8 @@ const EditItem = () => {
   ));
 
   return (
-    <div className={classes['wrap-new-item']}>
-      <div className={classes['new-item-title']}>Edit article</div>
+    <div className={classes['wrap-item']}>
+      <div className={classes['item-title']}>Edit article</div>
       <div className={classes['new-item-info']}>
         <form onSubmit={onSubmit}>
           <div className={classes['new-item-info-title']}>

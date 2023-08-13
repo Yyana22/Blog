@@ -66,7 +66,6 @@ export const singInAccount = (user) => async (dispatch) => {
 export const setEditAccount = (user) => async (dispatch) => {
   try {
     const result = await blogServise.editAccount(user);
-    console.log(result);
     if (result) {
       dispatch(setLoading());
       dispatch(fetchEditAccount(result.user));

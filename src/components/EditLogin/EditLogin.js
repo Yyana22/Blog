@@ -2,8 +2,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 
 import { setEditAccount } from '../../store/User/UserActions';
-
-import classes from './EditLogin.module.scss';
+import classes from '../styles/styleFormsAccount.module.scss';
 const EditLogin = () => {
   const dispatch = useDispatch();
   const {
@@ -24,9 +23,9 @@ const EditLogin = () => {
     dispatch(setEditAccount(user));
   });
   return (
-    <div className={classes['wrap-edit-login']}>
-      <p className={classes['title-edit-login']}>Edit Profile</p>
-      <form className={classes['form-edit-login']} onSubmit={onSubmit}>
+    <div className={classes['wrap-form-account']}>
+      <p className={classes['title-form-account']}>Edit Profile</p>
+      <form className={classes['form-account']} onSubmit={onSubmit}>
         <div className={classes['wrap-user-name']}>
           <label htmlFor="Username">Username</label>
           <input
@@ -118,7 +117,7 @@ const EditLogin = () => {
             {...register('image')}
           ></input>
         </div>
-        <button type="submit" className={classes['btn-save']}>
+        <button type="submit" className={classes['btn-form']}>
           Save
         </button>
       </form>

@@ -6,8 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ReactMarkdown from 'react-markdown';
 
 import { likedArticle, unLikedArticle } from '../../store/Likes/LikesActions';
-import { getNewPost } from '../../store/OpenItem/OpenItemActions';
-import { deleteArticle } from '../../store/Article/ArticleActions';
+import { getNewPost, deleteArticle } from '../../store/Article/ArticleActions';
 import Loader from '../Loader/loader';
 
 import classes from './OpenItem.module.scss';
@@ -17,8 +16,8 @@ const OpenItem = () => {
   const [notLike, setNotLike] = useState(false);
 
   const dispatch = useDispatch();
-  let propsItem = useSelector((state) => state.openItem.post);
-  let isLoading = useSelector((state) => state.openItem.loading);
+  let propsItem = useSelector((state) => state.article.post);
+  let isLoading = useSelector((state) => state.article.loading);
   let del = useSelector((state) => state.article.delete);
   let selectedUsername = useSelector((state) => state.selectedUser.username);
   useEffect(() => {

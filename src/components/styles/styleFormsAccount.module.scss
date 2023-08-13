@@ -1,17 +1,17 @@
-.wrap-login-account{
+.wrap-form-account{
 	width: 318px;
 	height: fit-content;
 	margin: 60px auto;
 	background-color: #fff;
 	padding: 48px 36px;
 }
-.title-login-account{
+.title-form-account{
 	text-align: center;
 	font-weight: 500;
 	color: #262626;
 	font-size: 20px;
 }
-.form-login-account > div {
+.form-account > div {
 	&:not(:last-child){
 		margin-bottom: 20px;
 		display: flex;
@@ -32,8 +32,7 @@
 	}
 }
 
-
-.btn-login{
+.btn-form{
 	background-color: #1890FF;
 	border-radius: 5px;
 	width: 100%;
@@ -46,7 +45,7 @@
 	}
 }
 
-.link-sing-up{
+.link-form{
 	margin-top: 8px;
 	text-align: center;
 	font-size: 12px;
@@ -54,4 +53,30 @@
 		color: #1890FF;
 		text-decoration: none;
 	}
+}
+
+//!create
+
+.input-agree {
+	display: none;
+}
+.wrap-agree input+label::before{
+	content: '';
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	flex-shrink: 0;
+	flex-grow: 0;
+	border: 1px solid #a0a0a0;
+	border-radius: 0.25em;
+	margin-right: 0.5em;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 50% 50%;
+}
+
+.wrap-agree input:checked+label::before{
+border-color: #1890FF;
+  background-color: #1890FF;
+  background-image: url('../../img/Shape.svg');
 }

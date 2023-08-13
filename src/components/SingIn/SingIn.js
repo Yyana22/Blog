@@ -4,8 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
 import { singInAccount } from '../../store/User/UserActions';
-
-import classes from './SingIn.module.scss';
+import classes from '../styles/styleFormsAccount.module.scss';
 const SingIn = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -28,9 +27,9 @@ const SingIn = () => {
   let errDiv = error ? <p style={{ textAlign: 'center', color: 'red' }}>No valid email or password</p> : null;
 
   return (
-    <div className={classes['wrap-login-account']}>
-      <p className={classes['title-login-account']}>Sign In</p>
-      <form className={classes['form-login-account']} onSubmit={onSubmit}>
+    <div className={classes['wrap-form-account']}>
+      <p className={classes['title-form-account']}>Sign In</p>
+      <form className={classes['form-account']} onSubmit={onSubmit}>
         <div className={classes['wrap-email-address']}>
           <label htmlFor="EmailAddress">Email address</label>
           <input
@@ -52,11 +51,11 @@ const SingIn = () => {
           ></input>
           {errDiv}
         </div>
-        <button type="submit" className={classes['btn-login']}>
+        <button type="submit" className={classes['btn-form']}>
           Login
         </button>
       </form>
-      <div className={classes['link-sing-up']}>
+      <div className={classes['link-form']}>
         Already have an account?<Link to="/sing-up"> Sign Up</Link>.
       </div>
     </div>

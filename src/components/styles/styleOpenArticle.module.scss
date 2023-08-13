@@ -1,9 +1,19 @@
-.wrap-new-item {
+.wrap-item {
 	background-color: #fff;
 	margin: 30px auto;
 	width: 874px;
 	height: fit-content;
 	padding: 48px 32px;
+}
+
+.item-title {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 28px;
+	color: #262626;
+	font-weight: 500;
+	margin-bottom: 20px;
 }
 label {
 	color: #262626;
