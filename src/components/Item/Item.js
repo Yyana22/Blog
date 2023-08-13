@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 
-import { likedArticle, unLikedArticle } from '../../store/Likes/LikesActions';
+import { likedArticle, unLikedArticle } from '../../store/Article/ArticleActions';
 
 import classes from './Item.module.scss';
 const Item = (props) => {
   const dispatch = useDispatch();
   const [notLike, setNotLike] = useState(false);
-  const { slug, title, description, createdAt, tagList, favorited, favoritesCount, author } = props.props;
+  const { slug, title, description, createdAt, tagList, favoritesCount, favorited, author } = props.props;
   const tags = tagList.map((item) => {
     return (
       <div
@@ -20,6 +20,7 @@ const Item = (props) => {
       </div>
     );
   });
+
   useEffect(() => {
     setNotLike(favorited);
   }, [favorited]);

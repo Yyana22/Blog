@@ -8,10 +8,10 @@ export const fetchStartPost = () => {
   };
 };
 
-export const getStartPost = (post) => {
+export const getStartPost = (articles) => {
   return {
     type: 'GET_START_POST',
-    post: post,
+    articles: articles,
   };
 };
 export const setLoading = () => ({
@@ -21,7 +21,35 @@ export const setError = (error) => ({
   type: 'SET_ERROR',
   error,
 });
+export const likes = (data) => {
+  return {
+    type: 'LIKE',
+    data,
+  };
+};
 
+export const noLikes = () => {
+  return {
+    type: 'NO_LIKE',
+  };
+};
+export const likedArticle = (slug) => async (dispatch) => {
+  try {
+    const result = await blogServise.liked(slug);
+    const data = await result.json();
+    dispatch(likes(data));
+  } catch (error) {
+    dispatch(setError(error));
+  }
+};
+
+export const unLikedArticle = (slug) => async (dispatch) => {
+  try {
+    await blogServise.unLiked(slug);
+  } catch (error) {
+    dispatch(setError(error));
+  }
+};
 export const getNewPost = (slug) => async (dispatch) => {
   dispatch(fetchStartPost());
   try {

@@ -1,6 +1,6 @@
 const defaultState = {
   loading: false,
-  post: {},
+  articles: [],
   error: false,
   favorite: false,
   delete: false,
@@ -16,7 +16,7 @@ export const reducerArticle = (state = defaultState, action = {}) => {
     case 'GET_START_POST':
       return {
         ...state,
-        post: action.post,
+        articles: action.articles,
         loading: true,
       };
     case 'DELETE_ARTIKLE':
@@ -25,9 +25,27 @@ export const reducerArticle = (state = defaultState, action = {}) => {
         delete: true,
       };
     case 'LIKE':
-      return { ...state, favorite: true };
+      console.log(action.data.article.favorited);
+      return {
+        ...state,
+        articles: state.articles.map((article) => {
+          if (article.slug === action.data.article.slug) {
+            return { ...article, favorited: false, favoritesCount: article.favoritesCount - 1 };
+          }
+          return article;
+        }),
+      };
     case 'NO_LIKE':
-      return { ...state, favorite: false };
+      console.log(action.data.article.favorited);
+      return {
+        ...state,
+        articles: state.articles.map((article) => {
+          if (article.slug === action.data.article.slug) {
+            return { ...article, favorited: true, favoritesCount: article.favoritesCount + 1 };
+          }
+          return article;
+        }),
+      };
     case 'SET_LOADING':
       return { ...state, loading: false };
     case 'SET_ERROR':

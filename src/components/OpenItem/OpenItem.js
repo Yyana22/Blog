@@ -5,8 +5,7 @@ import { format } from 'date-fns';
 import { useDispatch, useSelector } from 'react-redux';
 import ReactMarkdown from 'react-markdown';
 
-import { likedArticle, unLikedArticle } from '../../store/Likes/LikesActions';
-import { getNewPost, deleteArticle } from '../../store/Article/ArticleActions';
+import { likedArticle, unLikedArticle, getNewPost, deleteArticle } from '../../store/Article/ArticleActions';
 import Loader from '../Loader/loader';
 
 import classes from './OpenItem.module.scss';
@@ -16,7 +15,7 @@ const OpenItem = () => {
   const [notLike, setNotLike] = useState(false);
 
   const dispatch = useDispatch();
-  let propsItem = useSelector((state) => state.article.post);
+  let propsItem = useSelector((state) => state.article.articles);
   let isLoading = useSelector((state) => state.article.loading);
   let del = useSelector((state) => state.article.delete);
   let selectedUsername = useSelector((state) => state.selectedUser.username);
@@ -30,7 +29,7 @@ const OpenItem = () => {
     dispatch(deleteArticle(slug));
     return navigate('/');
   };
-  const { title, description, createdAt, body, author, tagList, favoritesCount } = propsItem;
+  const { title, description, createdAt, body, author, tagList, favoritesCount } = propsItem; //favorited
   let tags = null;
   if (tagList) {
     tags = tagList.map((item) => {
@@ -41,6 +40,9 @@ const OpenItem = () => {
       );
     });
   }
+  //   useEffect(() => {
+  //     setNotLike(favorited);
+  //   }, [favorited]);
   const checkLike = () => {
     if (!localStorage.getItem('token')) {
       return;
