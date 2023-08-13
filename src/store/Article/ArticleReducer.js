@@ -4,12 +4,16 @@ const defaultState = {
 
 export const reducerArticle = (state = defaultState, action = {}) => {
   switch (action.type) {
-    case 'CREATE_ARTIKLE':
-      return {
-        username: action.user.username,
-        email: action.user.email,
-        token: action.user.token,
-      };
+    //  case 'CREATE_ARTIKLE':
+    //    return {
+    //      username: action.user.username,
+    //      email: action.user.email,
+    //      token: action.user.token,
+    //    };
+    //  case 'EDIT_ARTIKLE':
+    //    return {
+    //      article: action.article,
+    //    };
     case 'SET_LOADING':
       return { ...state, loading: false };
     case 'SET_ERROR':

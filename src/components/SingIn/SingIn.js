@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 import { singInAccount } from '../../store/User/UserActions';
 
@@ -8,7 +9,7 @@ import classes from './SingIn.module.scss';
 const SingIn = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit } = useForm();
   let info = useSelector((state) => state.selectedUser);
   const error = useSelector((state) => state.selectedUser.error);
   const onSubmit = handleSubmit((data) => {
@@ -18,11 +19,12 @@ const SingIn = () => {
       password,
     };
     dispatch(singInAccount(user));
-    reset();
   });
-  if (info.token) {
-    return navigate('/');
-  }
+  useEffect(() => {
+    if (info.token) {
+      return navigate('/');
+    }
+  }, [info.token, navigate]);
   let errDiv = error ? <p style={{ textAlign: 'center', color: 'red' }}>No valid email or password</p> : null;
 
   return (

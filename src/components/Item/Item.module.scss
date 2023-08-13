@@ -26,9 +26,6 @@
 		margin-right: 13px;
 	}
 }
-.count-likes{
-	margin-left: 20px;
-}
 
 .close-item-info-title{
 	color: #1890FF;
@@ -53,23 +50,31 @@
   white-space: nowrap;
   color: #000;
 }
+
+//likes
 .wrap-likes {
+	top: 5px;
 	width: 32px;
 	height: 26px;
 	display: block;
 	position: relative;
   }
-  input[type="checkbox"] {
+  .article-info__likes {
 	display: none;
   }
-  input[type="checkbox"] + span {
+  .article-info__likes + .icon-like {
 	position: absolute;
-	left: 0; top: 5px;
+	left: 0;
 	width: 100%;
 	height: 100%;
 	background: url("../../img/heartBlack.png") no-repeat;
 	cursor: pointer;
   }
-  input[type="checkbox"]:checked + span {
+  .article-info__likes:checked + .icon-like {
 	background: url("../../img/heartRed.png") no-repeat; 
   }
+
+  .count-likes{
+	margin-left: 20px;
+	text-align: center;
+}

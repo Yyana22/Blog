@@ -2,8 +2,7 @@ const defaultState = {
   loading: false,
   posts: [],
   error: false,
-  articlesCount: 0,
-  page: 1,
+  total: 0,
 };
 
 export const reducerItemList = (state = defaultState, action = {}) => {
@@ -14,13 +13,11 @@ export const reducerItemList = (state = defaultState, action = {}) => {
         loading: true,
       };
     case 'GET_START_POSTS':
-      console.log(action.posts);
       return {
         ...state,
         posts: [...action.posts],
         loading: true,
-        articlesCount: action.articlesCount,
-        page: action.page,
+        total: action.articlesCount,
       };
     case 'SET_LOADING':
       return { ...state, loading: false };

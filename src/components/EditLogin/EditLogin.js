@@ -20,8 +20,8 @@ const EditLogin = () => {
       password,
       image,
     };
-    dispatch(setEditAccount(user));
     reset();
+    dispatch(setEditAccount(user));
   });
   return (
     <div className={classes['wrap-edit-login']}>

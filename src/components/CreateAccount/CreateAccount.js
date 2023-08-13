@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 import { setCreateAccount } from '../../store/User/UserActions';
 
@@ -9,16 +10,12 @@ const CreateAccount = () => {
   let info = useSelector((state) => state.selectedUser);
   console.log(info);
   const navigate = useNavigate();
-  if (info.token) {
-    return navigate('/');
-  }
   const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-    reset,
   } = useForm();
   const password = watch('password');
   const onSubmit = handleSubmit((data) => {
@@ -29,8 +26,13 @@ const CreateAccount = () => {
       password,
     };
     dispatch(setCreateAccount(user));
-    reset();
   });
+
+  useEffect(() => {
+    if (info.token) {
+      return navigate('/');
+    }
+  }, [info.token, navigate]);
   return (
     <div className={classes['wrap-create-account']}>
       <p className={classes['title-create-account']}>Create new account</p>

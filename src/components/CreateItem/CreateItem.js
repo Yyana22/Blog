@@ -23,12 +23,12 @@ const CreateItem = () => {
   });
   const onSubmit = handleSubmit((data) => {
     const { title, description, tags, body } = data;
-    let tagsArr = tags.map((item) => item.name);
+    let tagList = tags.map((item) => item.name);
     const article = {
       title,
       description,
       body,
-      tagsArr,
+      tagList,
     };
     dispatch(createArticle(article));
     reset();

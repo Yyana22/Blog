@@ -27,7 +27,6 @@ export const getNewPost = (slug) => async (dispatch) => {
   try {
     const result = await blogServise.getPost(slug);
     const { article } = result;
-    console.log(result);
     dispatch(getStartPost(article));
     if (article) {
       dispatch(setLoading());

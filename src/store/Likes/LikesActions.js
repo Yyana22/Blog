@@ -2,12 +2,10 @@ import BlogServise from '../../api-service';
 
 const blogServise = new BlogServise();
 
-export const likes = (favorited, favoritesCount) => {
-  console.log(favorited, favoritesCount);
+export const likes = (data) => {
   return {
     type: 'LIKE',
-    favorited,
-    favoritesCount,
+    data,
   };
 };
 
@@ -23,9 +21,8 @@ export const setError = (error) => ({
 export const likedArticle = (slug) => async (dispatch) => {
   try {
     const result = await blogServise.liked(slug);
-    const res = await result.json();
-    const { favorited, favoritesCount } = res.article;
-    dispatch(likes(favorited, favoritesCount));
+    const data = await result.json();
+    dispatch(likes(data));
   } catch (error) {
     dispatch(setError(error));
   }

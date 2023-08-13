@@ -1,5 +1,5 @@
 export default class BlogServise {
-  async createAccount(user) {
+  async createAccount(data) {
     try {
       const result = await fetch('https://blog.kata.academy/api/users', {
         method: 'POST',
@@ -7,13 +7,7 @@ export default class BlogServise {
           'Content-Type': 'application/json',
           Accept: 'application/json',
         },
-        body: JSON.stringify({
-          user: {
-            username: user.username,
-            email: user.email,
-            password: user.password,
-          },
-        }),
+        body: JSON.stringify({ user: data }),
       }).then((body) => body);
       if (!result.ok) {
         throw new Error('Код ошибки: ' + result.status);
@@ -23,7 +17,7 @@ export default class BlogServise {
       console.log(error);
     }
   }
-  async editAccount(user) {
+  async editAccount(data) {
     try {
       const result = await fetch('https://blog.kata.academy/api/user/', {
         method: 'PUT',
@@ -32,14 +26,7 @@ export default class BlogServise {
           Accept: 'application/json',
           Authorization: `Token ${localStorage.getItem('token')}`,
         },
-        body: JSON.stringify({
-          user: {
-            username: user.username,
-            email: user.email,
-            password: user.password,
-            image: user.image,
-          },
-        }),
+        body: JSON.stringify({ user: data }),
       }).then((body) => body);
       if (!result.ok) {
         throw new Error('Код ошибки: ' + result.status);
@@ -50,7 +37,7 @@ export default class BlogServise {
       console.log(error);
     }
   }
-  async singInAccount(user) {
+  async singInAccount(data) {
     try {
       const result = await fetch('https://blog.kata.academy/api/users/login', {
         method: 'POST',
@@ -58,12 +45,7 @@ export default class BlogServise {
           'Content-Type': 'application/json',
           Accept: 'application/json',
         },
-        body: JSON.stringify({
-          user: {
-            email: user.email,
-            password: user.password,
-          },
-        }),
+        body: JSON.stringify({ user: data }),
       }).then((body) => body);
       if (!result.ok) {
         throw new Error('Код ошибки: ' + result.status);
@@ -74,8 +56,7 @@ export default class BlogServise {
     }
   }
 
-  async createArticle(article) {
-    console.log(article.tagsArr);
+  async createArticle(data) {
     try {
       const result = await fetch('https://blog.kata.academy/api/articles', {
         method: 'POST',
@@ -84,14 +65,27 @@ export default class BlogServise {
           Accept: 'application/json',
           Authorization: `Token ${localStorage.getItem('token')}`,
         },
-        body: JSON.stringify({
-          article: {
-            title: article.title,
-            description: article.description,
-            body: article.body,
-            tagList: article.tagsArr,
-          },
-        }),
+        body: JSON.stringify({ article: data }),
+      }).then((body) => body);
+      if (!result.ok) {
+        throw new Error('Код ошибки: ' + result.status);
+      }
+      return result;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async editArticle(data, slug) {
+    try {
+      const result = await fetch(`https://blog.kata.academy/api/articles/${slug}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Token ${localStorage.getItem('token')}`,
+        },
+        body: JSON.stringify({ article: data }),
       }).then((body) => body);
       if (!result.ok) {
         throw new Error('Код ошибки: ' + result.status);
@@ -103,6 +97,7 @@ export default class BlogServise {
   }
 
   async deleteArticle(slug) {
+    console.log(slug);
     try {
       const response = await fetch(`https://blog.kata.academy/api/articles/${slug}`, {
         method: 'DELETE',
@@ -147,7 +142,7 @@ export default class BlogServise {
   }
   async getPosts(page) {
     try {
-      const response = await fetch(`https://blog.kata.academy/api/articles?limit=5&offset=${page * 5}`).then((result) =>
+      const response = await fetch(`https://blog.kata.academy/api/articles?limit=5&offset=${page}`).then((result) =>
         result.json()
       );
       return await response;

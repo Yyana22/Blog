@@ -1,6 +1,7 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Popconfirm } from 'antd';
+import { format } from 'date-fns';
 import { useDispatch, useSelector } from 'react-redux';
 import ReactMarkdown from 'react-markdown';
 
@@ -12,10 +13,9 @@ import Loader from '../Loader/loader';
 import classes from './OpenItem.module.scss';
 const OpenItem = () => {
   const navigate = useNavigate();
-
   const { slug } = useParams();
   const [notLike, setNotLike] = useState(false);
-  let isFavorite = useSelector((state) => state.likes);
+
   const dispatch = useDispatch();
   let propsItem = useSelector((state) => state.openItem.post);
   let isLoading = useSelector((state) => state.openItem.loading);
@@ -28,10 +28,10 @@ const OpenItem = () => {
     return <Loader />;
   }
   const deleted = () => {
-    deleteArticle(propsItem.slug);
+    dispatch(deleteArticle(slug));
     return navigate('/');
   };
-  const { title, description, createdAt, body, author, tagList } = propsItem;
+  const { title, description, createdAt, body, author, tagList, favoritesCount } = propsItem;
   let tags = null;
   if (tagList) {
     tags = tagList.map((item) => {
@@ -62,7 +62,7 @@ const OpenItem = () => {
           <button className={classes['delete-item']}>Delete</button>
         </Popconfirm>
         <button className={classes['edit-item']}>
-          <Link className={classes['link-btn']} to="/edit-item">
+          <Link className={classes['link-btn']} to={`/articles/${slug}/edit`}>
             Edit
           </Link>
         </button>
@@ -82,7 +82,7 @@ const OpenItem = () => {
                 type="checkbox"
               />
               <span className={classes['icon-like']}></span>
-              <span className={classes['count-likes']}>{isFavorite.favoritesCount}</span>
+              <span className={classes['count-likes']}>{favoritesCount}</span>
             </label>
           </div>
           <div className={classes['open-item-info-tags']}>{tags}</div>
@@ -90,11 +90,11 @@ const OpenItem = () => {
         </div>
         <div className={classes['open-item-right-info']}>
           <div className={classes['open-item-profile-info']}>
+            <img width="50" height="50" src={author ? author.image : null} className={classes['avatar']} alt="avatar" />
             <div className={classes.profile}>
               <div className={classes['profile-names']}>{author ? author.username : null}</div>
-              <div className={classes['date-created']}>{createdAt}</div>
+              <div className={classes['date-created']}>{createdAt ? format(new Date(createdAt), 'PP') : null}</div>
             </div>
-            <img width="50" height="50" src={author ? author.image : null} className={classes['avatar']} alt="avatar" />
           </div>
           {btn}
         </div>

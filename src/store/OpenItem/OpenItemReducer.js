@@ -14,7 +14,6 @@ export const reducerOpenItem = (state = defaultState, action = {}) => {
         loading: true,
       };
     case 'GET_START_POST':
-      console.log(action.post);
       return {
         ...state,
         post: action.post,
