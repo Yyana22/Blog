@@ -9,7 +9,7 @@ const EditItem = () => {
   const { slug } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { title, description, body, tagList } = useSelector((state) => state.article.articles);
+  const { title, description, body, tagList } = useSelector((state) => state.article.selectedArticle);
   const userToken = localStorage.getItem('token');
 
   useEffect(() => {

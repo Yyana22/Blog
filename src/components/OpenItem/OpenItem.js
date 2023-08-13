@@ -15,7 +15,7 @@ const OpenItem = () => {
   const [notLike, setNotLike] = useState(false);
 
   const dispatch = useDispatch();
-  let propsItem = useSelector((state) => state.article.articles);
+  let propsItem = useSelector((state) => state.article.selectedArticle);
   let isLoading = useSelector((state) => state.article.loading);
   let del = useSelector((state) => state.article.delete);
   let selectedUsername = useSelector((state) => state.selectedUser.username);

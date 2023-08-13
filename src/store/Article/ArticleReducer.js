@@ -4,6 +4,7 @@ const defaultState = {
   error: false,
   favorite: false,
   delete: false,
+  selectedArticle: [],
 };
 
 export const reducerArticle = (state = defaultState, action = {}) => {
@@ -13,11 +14,23 @@ export const reducerArticle = (state = defaultState, action = {}) => {
         ...state,
         loading: true,
       };
+    case 'ADD_START_POSTS':
+      return {
+        ...state,
+        loading: true,
+      };
     case 'GET_START_POST':
       return {
         ...state,
-        articles: action.articles,
+        selectedArticle: action.article,
         loading: true,
+      };
+    case 'GET_START_POSTS':
+      return {
+        ...state,
+        articles: [...action.articles],
+        loading: true,
+        total: action.articlesCount,
       };
     case 'DELETE_ARTIKLE':
       return {
@@ -29,7 +42,7 @@ export const reducerArticle = (state = defaultState, action = {}) => {
         ...state,
         articles: state.articles.map((article) => {
           if (article.slug === action.data.article.slug) {
-            return { ...article, favorited: false, favoritesCount: article.favoritesCount - 1 };
+            return { ...article, favorited: true, favoritesCount: article.favoritesCount + 1 };
           }
           return article;
         }),
@@ -39,7 +52,7 @@ export const reducerArticle = (state = defaultState, action = {}) => {
         ...state,
         articles: state.articles.map((article) => {
           if (article.slug === action.data.article.slug) {
-            return { ...article, favorited: true, favoritesCount: article.favoritesCount + 1 };
+            return { ...article, favorited: false, favoritesCount: article.favoritesCount - 1 };
           }
           return article;
         }),

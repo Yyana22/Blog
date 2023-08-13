@@ -8,10 +8,24 @@ export const fetchStartPost = () => {
   };
 };
 
-export const getStartPost = (articles) => {
+export const fetchStartPosts = () => {
+  return {
+    type: 'ADD_START_POSTS',
+  };
+};
+
+export const getStartPost = (article) => {
   return {
     type: 'GET_START_POST',
-    articles: articles,
+    article: article,
+  };
+};
+
+export const getStartPosts = (articles, articlesCount) => {
+  return {
+    type: 'GET_START_POSTS',
+    articles: [...articles],
+    articlesCount,
   };
 };
 export const setLoading = () => ({
@@ -61,6 +75,24 @@ export const getNewPost = (slug) => async (dispatch) => {
     dispatch(getStartPost(article));
     if (article) {
       dispatch(setLoading());
+    }
+  } catch (error) {
+    dispatch(setError(error));
+  }
+};
+
+export const getNewPosts = (page) => async (dispatch) => {
+  dispatch(fetchStartPosts());
+  try {
+    const result = await blogServise.getPosts(page);
+    const { articles, articlesCount } = result;
+    dispatch(getStartPosts(articles, articlesCount));
+    if (articles) {
+      dispatch(setLoading());
+    }
+
+    if (!articles) {
+      dispatch(getNewPosts(page));
     }
   } catch (error) {
     dispatch(setError(error));

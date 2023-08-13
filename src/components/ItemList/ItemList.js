@@ -4,7 +4,7 @@ import { Pagination } from 'antd';
 import { useSearchParams } from 'react-router-dom';
 
 import Item from '../Item/Item';
-import { getNewPosts } from '../../store/ItemList/ItemListActions';
+import { getNewPosts } from '../../store/Article/ArticleActions';
 import Loader from '../Loader/loader';
 
 import classes from './ItemList.module.scss';
@@ -13,8 +13,9 @@ const ItemList = () => {
   const currentPage = searchParams.get('page') || 1;
 
   const dispatch = useDispatch();
-  let propsItem = useSelector((state) => state.itemList);
-  let { loading, total } = useSelector((state) => state.itemList);
+  let propsItem = useSelector((state) => state.article);
+  console.log(propsItem);
+  let { loading, total } = useSelector((state) => state.article);
   useEffect(() => {
     setSearchParams({ page: currentPage.toString() || '1' });
     const offset = currentPage ? currentPage * 5 - 5 : 1;
@@ -24,7 +25,7 @@ const ItemList = () => {
   const onPaginationChange = (page) => {
     setSearchParams({ page: page });
   };
-  let items = propsItem.posts.map((item) => {
+  let items = propsItem.articles.map((item) => {
     return (
       <li key={Math.random() * 10000} className={classes['item-closer']}>
         <Item props={item}></Item>
