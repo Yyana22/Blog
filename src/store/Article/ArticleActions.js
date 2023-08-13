@@ -28,9 +28,10 @@ export const likes = (data) => {
   };
 };
 
-export const noLikes = () => {
+export const noLikes = (data) => {
   return {
     type: 'NO_LIKE',
+    data,
   };
 };
 export const likedArticle = (slug) => async (dispatch) => {
@@ -45,7 +46,9 @@ export const likedArticle = (slug) => async (dispatch) => {
 
 export const unLikedArticle = (slug) => async (dispatch) => {
   try {
-    await blogServise.unLiked(slug);
+    const result = await blogServise.unLiked(slug);
+    const data = await result.json();
+    dispatch(noLikes(data));
   } catch (error) {
     dispatch(setError(error));
   }
