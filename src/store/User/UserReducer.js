@@ -26,7 +26,6 @@ export const reducerSelectedUser = (state = defaultState, action = {}) => {
         token: null,
       };
     case 'EDIT_ACCOUNT':
-      console.log(action);
       return {
         username: action.user.username,
         email: action.user.email,

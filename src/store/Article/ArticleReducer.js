@@ -25,7 +25,6 @@ export const reducerArticle = (state = defaultState, action = {}) => {
         delete: true,
       };
     case 'LIKE':
-      console.log(action.data.article.favorited);
       return {
         ...state,
         articles: state.articles.map((article) => {
@@ -36,7 +35,6 @@ export const reducerArticle = (state = defaultState, action = {}) => {
         }),
       };
     case 'NO_LIKE':
-      console.log(action.data.article.favorited);
       return {
         ...state,
         articles: state.articles.map((article) => {

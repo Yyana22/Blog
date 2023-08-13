@@ -97,7 +97,6 @@ export default class BlogServise {
   }
 
   async deleteArticle(slug) {
-    console.log(slug);
     try {
       const response = await fetch(`https://blog.kata.academy/api/articles/${slug}`, {
         method: 'DELETE',

@@ -14,7 +14,6 @@ export const fetchSingInAccount = (user) => {
   };
 };
 export const fetchEditAccount = (user) => {
-  console.log(user);
   return {
     type: 'EDIT_ACCOUNT',
     user,

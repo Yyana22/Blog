@@ -81,7 +81,6 @@ export const editArticle = (article, slug) => async (dispatch) => {
 };
 
 export const deleteArticle = (slug) => async (dispatch) => {
-  console.log(slug);
   try {
     await blogServise.deleteArticle(slug);
   } catch (error) {

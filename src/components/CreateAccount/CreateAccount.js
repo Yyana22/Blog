@@ -7,7 +7,6 @@ import { setCreateAccount } from '../../store/User/UserActions';
 import classes from '../styles/styleFormsAccount.module.scss';
 const CreateAccount = () => {
   let info = useSelector((state) => state.selectedUser);
-  console.log(info);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {
