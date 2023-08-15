@@ -38,7 +38,6 @@ export const reducerArticle = (state = defaultState, action = {}) => {
         delete: true,
       };
     case 'LIKE':
-      console.log(action.slug);
       return {
         ...state,
         articles: state.articles.map((article) => {

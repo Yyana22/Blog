@@ -36,7 +36,6 @@ export const setError = (error) => ({
   error,
 });
 export const likes = ({ favorited, favoritesCount, slug }) => {
-  console.log(favorited, favoritesCount, slug);
   return {
     type: 'LIKE',
     favorited,
@@ -46,7 +45,6 @@ export const likes = ({ favorited, favoritesCount, slug }) => {
 };
 
 export const noLikes = ({ favorited, favoritesCount, slug }) => {
-  console.log(favorited, favoritesCount, slug);
   return {
     type: 'NO_LIKE',
     favorited,
