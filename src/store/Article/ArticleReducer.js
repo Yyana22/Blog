@@ -46,6 +46,11 @@ export const reducerArticle = (state = defaultState, action = {}) => {
           }
           return article;
         }),
+        selectedArticle: {
+          ...state.selectedArticle,
+          favorite: true,
+          favoritesCount: state.selectedArticle.favoritesCount + 1,
+        },
       };
     case 'NO_LIKE':
       return {
@@ -56,6 +61,11 @@ export const reducerArticle = (state = defaultState, action = {}) => {
           }
           return article;
         }),
+        selectedArticle: {
+          ...state.selectedArticle,
+          favorite: false,
+          favoritesCount: state.selectedArticle.favoritesCount - 1,
+        },
       };
     case 'SET_LOADING':
       return { ...state, loading: false };
