@@ -113,7 +113,7 @@ export default class BlogServise {
 
   async liked(slug) {
     try {
-      const response = await fetch(`https://blog.kata.academy/api//articles/${slug}/favorite`, {
+      const response = await fetch(`https://blog.kata.academy/api/articles/${slug}/favorite`, {
         method: 'POST',
         headers: {
           Authorization: `Token ${localStorage.getItem('token')}`,
@@ -127,7 +127,7 @@ export default class BlogServise {
   }
   async unLiked(slug) {
     try {
-      const response = await fetch(`https://blog.kata.academy/api//articles/${slug}/favorite`, {
+      const response = await fetch(`https://blog.kata.academy/api/articles/${slug}/favorite`, {
         method: 'DELETE',
         headers: {
           Authorization: `Token ${localStorage.getItem('token')}`,

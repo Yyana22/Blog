@@ -14,7 +14,6 @@ const ItemList = () => {
 
   const dispatch = useDispatch();
   let propsItem = useSelector((state) => state.article);
-  console.log(propsItem);
   let { loading, total } = useSelector((state) => state.article);
   useEffect(() => {
     setSearchParams({ page: currentPage.toString() || '1' });

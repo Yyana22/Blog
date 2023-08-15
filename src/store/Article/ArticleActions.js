@@ -35,10 +35,13 @@ export const setError = (error) => ({
   type: 'SET_ERROR',
   error,
 });
-export const likes = (data) => {
+export const likes = ({ favorited, favoritesCount, slug }) => {
+  console.log(favorited, favoritesCount, slug);
   return {
     type: 'LIKE',
-    data,
+    favorited,
+    favoritesCount,
+    slug,
   };
 };
 
@@ -51,8 +54,8 @@ export const noLikes = (data) => {
 export const likedArticle = (slug) => async (dispatch) => {
   try {
     const result = await blogServise.liked(slug);
-    const data = await result.json();
-    dispatch(likes(data));
+    const res = await result.json();
+    dispatch(likes(res.article));
   } catch (error) {
     dispatch(setError(error));
   }
@@ -61,8 +64,8 @@ export const likedArticle = (slug) => async (dispatch) => {
 export const unLikedArticle = (slug) => async (dispatch) => {
   try {
     const result = await blogServise.unLiked(slug);
-    const data = await result.json();
-    dispatch(noLikes(data));
+    const res = await result.json();
+    console.log(res);
   } catch (error) {
     dispatch(setError(error));
   }
