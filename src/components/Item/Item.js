@@ -1,7 +1,7 @@
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { likedArticle, unLikedArticle } from '../../store/Article/ArticleActions';
 
@@ -9,7 +9,8 @@ import classes from './Item.module.scss';
 const Item = (props) => {
   const dispatch = useDispatch();
   const [notLike, setNotLike] = useState(false);
-  const { slug, title, description, createdAt, tagList, favoritesCount, author } = props.props;
+
+  const { slug, title, description, createdAt, tagList, favoritesCount, author, favorited } = props.props;
   const tags = tagList.map((item) => {
     return (
       <div
@@ -20,6 +21,9 @@ const Item = (props) => {
       </div>
     );
   });
+  useEffect(() => {
+    setNotLike(favorited);
+  }, [favorited]);
   const checkLike = () => {
     if (!localStorage.getItem('token')) {
       return;

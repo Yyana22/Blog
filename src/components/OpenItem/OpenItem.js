@@ -1,5 +1,5 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { useEffect } from 'react'; //useState,
+import { useState, useEffect } from 'react';
 import { Popconfirm } from 'antd';
 import { format } from 'date-fns';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,16 +12,19 @@ import classes from './OpenItem.module.scss';
 const OpenItem = () => {
   const navigate = useNavigate();
   const { slug } = useParams();
-
+  const [notLike, setNotLike] = useState(false);
   const dispatch = useDispatch();
   let propsItem = useSelector((state) => state.article.selectedArticle);
-  let items = useSelector((state) => state.article.articles);
   let isLoading = useSelector((state) => state.article.loading);
-  let del = useSelector((state) => state.article.delete);
+  //   let del = useSelector((state) => state.article.delete);
   let selectedUsername = useSelector((state) => state.selectedUser.username);
-  useEffect(() => {
-    dispatch(getNewPost(slug));
-  }, [del]);
+  //   useEffect(() => {
+  //     dispatch(getNewPost(slug));
+  //   }, [del]);
+  //   useEffect(() => {
+  //     dispatch(getNewPost(slug));
+  //     setNotLike(favorited);
+  //   }, []);
   if (isLoading) {
     return <Loader />;
   }
@@ -29,9 +32,7 @@ const OpenItem = () => {
     dispatch(deleteArticle(slug));
     return navigate('/');
   };
-  const { title, description, createdAt, body, author, tagList, favoritesCount, favorited } = propsItem; //favorited
-  console.log(propsItem);
-  console.log(items);
+  const { title, description, createdAt, body, author, tagList, favoritesCount, favorited } = propsItem;
   let tags = null;
   if (tagList) {
     tags = tagList.map((item) => {
@@ -42,16 +43,24 @@ const OpenItem = () => {
       );
     });
   }
+  useEffect(() => {
+    dispatch(getNewPost(slug));
+    setNotLike(favorited);
+  }, []);
   const checkLike = () => {
-    if (!favorited) {
-      console.log('dispatch Like');
+    if (!localStorage.getItem('token')) {
+      return;
+    }
+    setNotLike(!notLike);
+
+    if (!notLike) {
       dispatch(likedArticle(slug));
     }
-    if (favorited) {
-      console.log('dispatch unLike');
+    if (notLike) {
       dispatch(unLikedArticle(slug));
     }
   };
+  console.log(favorited);
   let btn =
     selectedUsername === author?.username ? (
       <div className={classes['btn-article']}>

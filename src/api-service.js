@@ -141,9 +141,13 @@ export default class BlogServise {
   }
   async getPosts(page) {
     try {
-      const response = await fetch(`https://blog.kata.academy/api/articles?limit=5&offset=${page}`).then((result) =>
-        result.json()
-      );
+      const response = await fetch(`https://blog.kata.academy/api/articles?limit=5&offset=${page}`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Token ${localStorage.getItem('token')}`,
+          'Content-Type': 'application/json',
+        },
+      }).then((result) => result.json());
       return await response;
     } catch (error) {
       console.log(error);
@@ -151,7 +155,13 @@ export default class BlogServise {
   }
   async getPost(slug) {
     try {
-      const response = await fetch(`https://blog.kata.academy/api/articles/${slug}`).then((result) => result.json());
+      const response = await fetch(`https://blog.kata.academy/api/articles/${slug}`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Token ${localStorage.getItem('token')}`,
+          'Content-Type': 'application/json',
+        },
+      }).then((result) => result.json());
       return await response;
     } catch (error) {
       console.log(error);

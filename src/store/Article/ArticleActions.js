@@ -45,10 +45,13 @@ export const likes = ({ favorited, favoritesCount, slug }) => {
   };
 };
 
-export const noLikes = (data) => {
+export const noLikes = ({ favorited, favoritesCount, slug }) => {
+  console.log(favorited, favoritesCount, slug);
   return {
     type: 'NO_LIKE',
-    data,
+    favorited,
+    favoritesCount,
+    slug,
   };
 };
 export const likedArticle = (slug) => async (dispatch) => {
@@ -65,7 +68,7 @@ export const unLikedArticle = (slug) => async (dispatch) => {
   try {
     const result = await blogServise.unLiked(slug);
     const res = await result.json();
-    console.log(res);
+    dispatch(noLikes(res.article));
   } catch (error) {
     dispatch(setError(error));
   }
