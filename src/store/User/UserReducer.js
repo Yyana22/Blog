@@ -3,10 +3,21 @@ const defaultState = {
   email: null,
   token: null,
   image: null,
+  loading: false,
 };
 
 export const reducerSelectedUser = (state = defaultState, action = {}) => {
   switch (action.type) {
+    case 'START_CREATE_ACCOUNT':
+      return {
+        ...state,
+        loading: true,
+      };
+    case 'START_SING_IN_ACCOUNT':
+      return {
+        ...state,
+        loading: true,
+      };
     case 'CREATE_ACCOUNT':
       return {
         username: action.user.username,

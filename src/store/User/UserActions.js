@@ -1,10 +1,24 @@
 import BlogServise from '../../api-service';
 
 const blogServise = new BlogServise();
+
+export const fetchStartCreateAccount = () => {
+  console.log('createS');
+  return {
+    type: 'START_CREATE_ACCOUNT',
+  };
+};
 export const fetchCreateAccount = (user) => {
   return {
     type: 'CREATE_ACCOUNT',
     user,
+  };
+};
+
+export const fetchStartSingInAccount = () => {
+  console.log('SinginS');
+  return {
+    type: 'START_SING_IN_ACCOUNT',
   };
 };
 export const fetchSingInAccount = (user) => {
@@ -31,6 +45,7 @@ export const setError = (error) => ({
   error,
 });
 export const setCreateAccount = (user) => async (dispatch) => {
+  dispatch(fetchStartCreateAccount());
   try {
     const result = await blogServise.createAccount(user);
     const userData = await result.json();
@@ -47,6 +62,7 @@ export const setCreateAccount = (user) => async (dispatch) => {
 };
 
 export const singInAccount = (user) => async (dispatch) => {
+  dispatch(fetchStartSingInAccount());
   try {
     const result = await blogServise.singInAccount(user);
     const userData = await result.json();

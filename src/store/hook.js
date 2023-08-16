@@ -15,7 +15,7 @@ const useAuth = () => {
       dispatch(fetchSingInAccount(user));
       dispatch(fetchCreateAccount(user));
     }
-  }, []);
+  }, [dispatch]);
 
   return null;
 };
