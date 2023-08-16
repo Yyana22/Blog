@@ -36,10 +36,6 @@ const App = () => {
           <Route path="/articles/:slug" element={<OpenItem />} />
           <Route path="/new-article" element={<CreateItem />} />
           <Route path="/articles/:slug/edit" element={<EditItem />} />
-          <Route
-            path="/"
-            element={<h1 style={{ textAlign: 'center', color: 'red' }}>Oops, this page doesn&apos;t exist</h1>}
-          />
         </Routes>
       </div>
     </div>
