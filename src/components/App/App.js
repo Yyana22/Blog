@@ -5,7 +5,6 @@ import CreateAccount from '../CreateAccount/CreateAccount';
 import SingIn from '../SingIn/SingIn';
 import EditLogin from '../EditLogin/EditLogin';
 import ItemListHOC from '../ItemListHOC/ItemListHOC';
-// import ItemList from '../ItemList/ItemList';
 import OpenItem from '../OpenItem/OpenItem';
 import CreateItem from '../CreateItem/CreateItem';
 import EditItem from '../EditItem/EditItem';
