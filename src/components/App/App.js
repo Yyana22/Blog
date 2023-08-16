@@ -4,7 +4,8 @@ import { useSelector } from 'react-redux';
 import CreateAccount from '../CreateAccount/CreateAccount';
 import SingIn from '../SingIn/SingIn';
 import EditLogin from '../EditLogin/EditLogin';
-import ItemList from '../ItemList/ItemList';
+import ItemListHOC from '../ItemListHOC/ItemListHOC';
+// import ItemList from '../ItemList/ItemList';
 import OpenItem from '../OpenItem/OpenItem';
 import CreateItem from '../CreateItem/CreateItem';
 import EditItem from '../EditItem/EditItem';
@@ -32,7 +33,7 @@ const App = () => {
           <Route path="/sing-up" element={<CreateAccount />} />
           <Route path="/sing-in" element={<SingIn />} />
           <Route path="/profile" element={<EditLogin />} />
-          <Route path="/" element={<ItemList />} />
+          <Route path="/" element={<ItemListHOC />} />
           <Route path="/articles/:slug" element={<OpenItem />} />
           <Route path="/new-article" element={<CreateItem />} />
           <Route path="/articles/:slug/edit" element={<EditItem />} />
