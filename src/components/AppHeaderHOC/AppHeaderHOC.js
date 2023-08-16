@@ -18,7 +18,11 @@ const AppHeaderHOC = () => {
         <Link to="/">Realworld Blog</Link>
       </div>
       <div className={classes['item-right']}>
-        {selectedUserInfo.token ? <AppHeaderIn clearStore={clearStore} info={selectedUserInfo} /> : <AppHeaderOut />}
+        {localStorage.getItem('token') ? (
+          <AppHeaderOut clearStore={clearStore} info={selectedUserInfo} />
+        ) : (
+          <AppHeaderIn />
+        )}
       </div>
     </div>
   );

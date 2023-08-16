@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import AppHeader from '../AppHeader/AppHeader';
+// import AppHeader from '../AppHeader/AppHeader';
 import CreateAccount from '../CreateAccount/CreateAccount';
 import SingIn from '../SingIn/SingIn';
 import EditLogin from '../EditLogin/EditLogin';
@@ -10,6 +10,8 @@ import ItemList from '../ItemList/ItemList';
 import OpenItem from '../OpenItem/OpenItem';
 import CreateItem from '../CreateItem/CreateItem';
 import EditItem from '../EditItem/EditItem';
+import AppHeaderHOC from '../AppHeaderHOC/AppHeaderHOC';
+// import useAuth from '../../store/hook';
 import { fetchSingInAccount, fetchCreateAccount } from '../../store/User/UserActions';
 
 import classes from './App.module.scss';
@@ -17,6 +19,8 @@ import classes from './App.module.scss';
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
+    //  useAuth();
+    //  return <div>1</div>;
     if (localStorage.getItem('token') && localStorage.getItem('user')) {
       const registeredUser = localStorage.getItem('user');
       const user = JSON.parse(registeredUser);
@@ -28,7 +32,7 @@ const App = () => {
   }, []);
   return (
     <div className={classes.app}>
-      <AppHeader />
+      <AppHeaderHOC />
       <div className={classes['app-main-content']}>
         <Routes>
           <Route path="/sing-up" element={<CreateAccount />} />
