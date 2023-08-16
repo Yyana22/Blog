@@ -26,7 +26,7 @@ const ItemList = () => {
   };
   let items = propsItem.articles.map((item) => {
     return (
-      <li key={Math.random() * 10000} className={classes['item-closer']}>
+      <li key={item.slug} className={classes['item-closer']}>
         <Item props={item}></Item>
       </li>
     );

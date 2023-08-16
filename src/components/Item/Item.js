@@ -13,10 +13,7 @@ const Item = (props) => {
   const { slug, title, description, createdAt, tagList, favoritesCount, author, favorited } = props.props;
   const tags = tagList.map((item) => {
     return (
-      <div
-        key={Math.random() * 1000000}
-        className={item.trim().length > 0 ? classes['tags-item'] : classes['tags-item-hide']}
-      >
+      <div key={item} className={item.trim().length > 0 ? classes['tags-item'] : classes['tags-item-hide']}>
         {item}
       </div>
     );
