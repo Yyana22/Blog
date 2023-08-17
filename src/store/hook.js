@@ -18,7 +18,7 @@ const useAuth = () => {
     }
   }, [dispatch]);
 
-  return null;
+  return false;
 };
 
 export default useAuth;

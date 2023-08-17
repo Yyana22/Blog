@@ -11,6 +11,7 @@ import EditItem from '../EditItem/EditItem';
 import AppHeaderHOC from '../AppHeaderHOC/AppHeaderHOC';
 import useAuth from '../../store/hook';
 import Loader from '../Loader/loader';
+import PrivateRoute from '../../privateRoute';
 
 import classes from './App.module.scss';
 
@@ -31,11 +32,17 @@ const App = () => {
         <Routes>
           <Route path="/sing-up" element={<CreateAccount />} />
           <Route path="/sing-in" element={<SingIn />} />
-          <Route path="/profile" element={<EditLogin />} />
+          <Route element={<PrivateRoute />}>
+            <Route path="/profile" element={<EditLogin />} />
+          </Route>
           <Route path="/" element={<ItemListHOC />} />
           <Route path="/articles/:slug" element={<OpenItem />} />
-          <Route path="/new-article" element={<CreateItem />} />
-          <Route path="/articles/:slug/edit" element={<EditItem />} />
+          <Route element={<PrivateRoute />}>
+            <Route path="/new-article" element={<CreateItem />} />
+          </Route>
+          <Route element={<PrivateRoute />}>
+            <Route path="/articles/:slug/edit" element={<EditItem />} />
+          </Route>
         </Routes>
       </div>
     </div>
